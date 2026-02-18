@@ -3,10 +3,6 @@ Library    SeleniumLibrary
 Resource   ../pages/login_page.robot
 
 *** Keywords ***
-Open Saucedemo
-    Open Browser    https://www.saucedemo.com    chrome
-    Maximize Browser Window
-
 Login As User
     [Arguments]    ${username}    ${password}
     Input Username    ${username}
@@ -19,3 +15,6 @@ Verify User Is On Products Page
 Verify Login Error Is Displayed
     [Arguments]    ${error_text}
     Verify Login Error Displayed    ${error_text}
+
+Verify User Is On Login Page
+    Verify Login Page Is Displayed

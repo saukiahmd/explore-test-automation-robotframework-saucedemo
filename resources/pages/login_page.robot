@@ -8,7 +8,14 @@ ${LOGIN_BUTTON}      id=login-button
 ${ERROR_MESSAGE}     css=.error-message-container
 ${PRODUCT_TITLE}     css=.title
 
+${MENU_BUTTON_SELECTOR}    css:#react-burger-menu-btn
+${LOGOUT_BUTTON_SELECTOR}    id=logout_sidebar_link
+
 *** Keywords ***
+Verify Login Page Is Displayed
+    Page Should Contain Element    ${USERNAME_INPUT}
+    Page Should Contain Element    ${PASSWORD_INPUT}
+    Page Should Contain Element    ${LOGIN_BUTTON}
 
 Input Username
     [Arguments]    ${username}

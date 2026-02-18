@@ -16,6 +16,7 @@ ${NAME_SELECTOR}    css:.inventory_container .inventory_list .inventory_item .in
 ${DESC_SELECTOR}    css:.inventory_container .inventory_list .inventory_item .inventory_item_description .inventory_item_label .inventory_item_desc
 ${PRICE_SELECTOR}    css:.inventory_container .inventory_list .inventory_item .inventory_item_description .pricebar .inventory_item_price
 ${ADD_TO_CART_BUTTON_SELECTOR}    css:.inventory_container .inventory_list .inventory_item .inventory_item_description .pricebar button
+${REMOVE_BUTTON_SELECTOR}    css:.inventory_container .inventory_list .inventory_item .inventory_item_description .pricebar button.btn_secondary
 
 #product detail
 ${BACK_TO_PRODUCT_LIST_SELECTOR}    css:.inventory_details_back_button
@@ -24,6 +25,7 @@ ${NAME_DETAIL_SELECTOR}    css:.inventory_details_name.large_size
 ${DESC_DETAIL_SELECTOR}    css:.inventory_details_desc.large_size
 ${PRICE_DETAIL_SELECTOR}    css:.inventory_details_price
 ${ADD_TO_CART_DETAIL_BUTTON_SELECTOR}    css:.btn.btn_primary.btn_small.btn_inventory
+${REMOVE_DETAIL_BUTTON_SELECTOR}    css:.btn.btn_secondary.btn_small.btn_inventory
 
 #footer
 ${SOCIAL_FOOTER_SELECTOR}    css:.social
@@ -171,6 +173,30 @@ Verify Product List Displayed After Sorting
     Lists Should Be Equal    ${sorted_list}     ${product_list_web_sort}
 
 Verify Product Detail Page Displayed
+    # verify element header
+    Page Should Contain Element    ${APP_LOGO_SELECTOR}
+    Page Should Contain Element    ${SHOPPING_CART_SELECTOR}
+    Page Should Contain Element    ${BACK_TO_PRODUCT_LIST_SELECTOR}
+
+    #verify element product detail
+    ${text_nama}=    Get Text    ${NAME_DETAIL_SELECTOR}
+    ${text_desc}=    Get Text    ${DESC_DETAIL_SELECTOR}
+    ${text_price}=   Get Text    ${PRICE_DETAIL_SELECTOR}
+
+    Page Should Contain Element    ${IMAGE_DETAIL_SELECTOR}
+    Page Should Contain Element    ${NAME_DETAIL_SELECTOR}
+    Should Not Be Empty           ${text_nama}
+    Page Should Contain Element    ${DESC_DETAIL_SELECTOR}
+    Should Not Be Empty           ${text_desc}
+    Page Should Contain Element    ${PRICE_DETAIL_SELECTOR}
+    Should Not Be Empty           ${text_price}
+    Page Should Contain Element    ${ADD_TO_CART_DETAIL_BUTTON_SELECTOR}
+    
+    #Verify Footer
+    Page Should Contain Element    ${SOCIAL_FOOTER_SELECTOR}
+    Page Should Contain Element    ${COPYRIGHT_FOOTER_SELECTOR}
+
+Click Product Name
     [Arguments]    ${product_name}
 
     ${NAME_PRODUCT}=    Get WebElements    ${NAME_SELECTOR}
@@ -180,28 +206,6 @@ Verify Product Detail Page Displayed
         ${text_nama}=    Get Text    ${NAME_PRODUCT}[${i}]
         IF    '${text_nama}' == '${product_name}'
             Click Element    ${NAME_PRODUCT}[${i}]
-            # verify element header
-            Page Should Contain Element    ${APP_LOGO_SELECTOR}
-            Page Should Contain Element    ${SHOPPING_CART_SELECTOR}
-            Page Should Contain Element    ${BACK_TO_PRODUCT_LIST_SELECTOR}
-
-            #verify element product detail
-            ${text_nama}=    Get Text    ${NAME_DETAIL_SELECTOR}
-            ${text_desc}=    Get Text    ${DESC_DETAIL_SELECTOR}
-            ${text_price}=   Get Text    ${PRICE_DETAIL_SELECTOR}
-
-            Page Should Contain Element    ${IMAGE_DETAIL_SELECTOR}
-            Page Should Contain Element    ${NAME_DETAIL_SELECTOR}
-            Should Not Be Empty           ${text_nama}
-            Page Should Contain Element    ${DESC_DETAIL_SELECTOR}
-            Should Not Be Empty           ${text_desc}
-            Page Should Contain Element    ${PRICE_DETAIL_SELECTOR}
-            Should Not Be Empty           ${text_price}
-            Page Should Contain Element    ${ADD_TO_CART_DETAIL_BUTTON_SELECTOR}
-            
-            #Verify Footer
-            Page Should Contain Element    ${SOCIAL_FOOTER_SELECTOR}
-            Page Should Contain Element    ${COPYRIGHT_FOOTER_SELECTOR}
             Exit For Loop
         END
         

@@ -12,4 +12,5 @@ Verify Product List Is Displayed After Sorting From
 
 Verify Product Detail Page Is Displayed
     [Arguments]    ${product_name}
-    Verify Product Detail Page Displayed   ${product_name}
+    Click Product Name    ${product_name}
+    Verify Product Detail Page Displayed

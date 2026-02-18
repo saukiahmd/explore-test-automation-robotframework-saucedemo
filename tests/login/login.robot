@@ -1,7 +1,8 @@
 *** Settings ***
 Resource    ../../resources/keywords/login_keyword.robot
+Resource    ../../resources/browser_config.robot
 
-Test Setup     Open Saucedemo
+Test Setup     Open Chrome With Config
 Test Teardown  Close Browser
 
 *** Test Cases ***
